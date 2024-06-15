@@ -14,5 +14,4 @@ build/
 .flutter-plugins
 .flutter-plugins-dependencies
 .packages
-assets/video/*
-
+frontend/assets/videos/*

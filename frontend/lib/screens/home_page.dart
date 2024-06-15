@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'video_player_screen.dart';
+import 'account_page.dart';
+import 'video_scroller_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -8,36 +9,18 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentBarItemIndex = 0;
-  int _currentVideoIndex = 0;
-  final int swipeDelta = 7;
-
-  PageController _pageController = PageController(initialPage: 1);
-
-  List<String> videoPaths = [
-    'assets/videos/video1.mp4',
-    'assets/videos/video2.mp4',
-    'assets/videos/video3.mp4',
-    'assets/videos/video4.mp4',
-    'assets/videos/video5.mp4',
+  final List<Widget> _pages = [
+    VideoScroller(),
+    Scaffold(body: Center(child: Text('Search Page'))),
+    Scaffold(body: Center(child: Text('Courses Page'))),
+    Scaffold(body: Center(child: Text('Wishlist Page'))),
+    AccountPage(),
   ];
-
-  void _onPageChanged(int index) {
-    setState(() {
-      _currentVideoIndex = index;
-    });
-  }
 
   void _onBarItemTapped(int index) {
     setState(() {
       _currentBarItemIndex = index;
     });
-  }
-
-  void _onVideoEnd() {
-    if (_currentVideoIndex < videoPaths.length - 1) {
-      _pageController.nextPage(
-          duration: const Duration(milliseconds: 500), curve: Curves.ease);
-    }
   }
 
   @override
@@ -46,18 +29,9 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text('Brain Unrot'),
       ),
-      body: PageView.builder(
-        physics: const PageScrollPhysics(parent: BouncingScrollPhysics()),
-        scrollDirection: Axis.vertical,
-        controller: _pageController,
-        onPageChanged: _onPageChanged,
-        itemCount: videoPaths.length,
-        itemBuilder: (context, index) {
-          return VideoPlayerScreen(
-            videoPath: videoPaths[index],
-            onVideoEnd: _onVideoEnd,
-          );
-        },
+      body: IndexedStack(
+        index: _currentBarItemIndex,
+        children: _pages,
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

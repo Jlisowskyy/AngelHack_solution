@@ -61,8 +61,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               displaySeekBar: false,
               automaticallyImplySkipNextButton: false,
               automaticallyImplySkipPreviousButton: false,
-              // Only show the play/pause button
-              // bottomButtonBar -> List<Widget>
               primaryButtonBar: [
                 MaterialPlayOrPauseButton(),
               ],
@@ -71,6 +69,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               displaySeekBar: false,
               automaticallyImplySkipNextButton: false,
               automaticallyImplySkipPreviousButton: false,
+              primaryButtonBar: [
+                MaterialPlayOrPauseButton(),
+              ],
             ),
             child: Video(
               controller: controller,

@@ -31,7 +31,6 @@ class _AccountPageState extends State<AccountPage> {
           SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
-              // Implement navigation to edit profile page
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => EditProfilePage()));
             },
