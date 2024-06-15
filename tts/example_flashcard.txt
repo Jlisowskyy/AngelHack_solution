@@ -1,6 +1,1 @@
-ACID rules ensure reliable processing in relational databases. ACID stands for Atomicity, Consistency, Isolation, Durability.
-Atomicity means transactions are all-or-nothing. Either all operations succeed or none do.
-Consistency ensures a transaction brings the database from one valid state to another, maintaining database rules.
-Isolation means transactions are executed independently, without interference from others.
-Durability ensures that once a transaction is committed, it remains so, even in the event of a system failure.
-Together, these principles guarantee reliable, consistent, and error-free database transactions.
+ACID rules ensure reliable processing in relational databases. ACID stands for Atomicity, Consistency, Isolation, Durability. Atomicity means transactions are all-or-nothing. Either all operations succeed or none do. Consistency ensures a transaction brings the database from one valid state to another, maintaining database rules. Isolation means transactions are executed independently, without interference from others. Durability ensures that once a transaction is committed, it remains so, even in the event of a system failure. Together, these principles guarantee reliable, consistent, and error-free database transactions.
