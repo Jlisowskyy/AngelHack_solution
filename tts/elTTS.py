@@ -4,8 +4,6 @@ import configparser
 
 
 class TTS(object):
-
-
     def __init__(self):
         self.cnf = configparser.ConfigParser()
         self.cnf.read('config.ini')
@@ -28,7 +26,7 @@ class TTS(object):
         )
 
         # Save audio to MP3
-        output_filename = 'output_audio.mp3'
+        output_filename = 'audio_storage/output.mp3'
         save(audio, output_filename)
 
 
