@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.18;
 
 import "./course_token.sol";
 
 contract UserContract {
     string public username;
     string public imageUrl;
-    
+
     mapping(address => uint256) private contractsMap;
     uint256 private contractCount;
     address private owner;
@@ -27,11 +27,11 @@ contract UserContract {
         CourseContract courseContract = CourseContract(_courseContractAddress);
         uint256 price = courseContract.getPrice();
         require(msg.value >= price, "Insufficient payment.");
-        
+
         courseContract.buyAccess{value: msg.value}();
-        
+
         uint256 accessKey = courseContract.getAccessKey();
-        
+
         contractsMap[_courseContractAddress] = accessKey;
         contractCount++;
     }
@@ -40,10 +40,15 @@ contract UserContract {
         return contractCount;
     }
 
-    function getVideoLinksFromCourseContract(address _courseContractAddress) public view onlyOwner returns (string[] memory) {
+    function getVideoLinksFromCourseContract(address _contractAddress)
+        public
+        view
+        onlyOwner
+        returns (string[] memory)
+    {
         require(contractsMap[_contractAddress] != 0, "User does not posses access to the course!");
 
-        CourseContract courseContract = CourseContract(_courseContractAddress);
+        CourseContract courseContract = CourseContract(_contractAddress);
         return courseContract.getVideoLinks(contractsMap[_contractAddress]);
     }
 }
