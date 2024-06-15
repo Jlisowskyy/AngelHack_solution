@@ -29,6 +29,23 @@ class TTS(object):
         output_filename = 'audio_storage/output.mp3'
         save(audio, output_filename)
 
+    @staticmethod
+    def generate_sentence(output_filename, sentence, cnf):
+        # opening client
+        client = ElevenLabs(
+            api_key=cnf['TTS_CONFIG']['ELEVENLABS_API_KEY']  # Defaults to ELEVEN_API_KEY
+        )
+
+        # generate audio
+        audio = client.generate(
+            text=sentence,
+            voice="Antoni",
+            model="eleven_multilingual_v2"
+        )
+
+        # Save audio to MP3
+        save(audio, output_filename)
+
 
 if __name__ == '__main__':
     tts = TTS()
