@@ -1,0 +1,2 @@
+0x8d21BadD71c06eB2FfEDa20AA0eFDB9C6f3bec89
+cast send --rpc-url fuji-c --keystore $KEYSTORE 0xD231eceAD60663E7E1471934Fe123fc3b92C927e "sendMessage(address,string)" 0x6F86C090811e2f4Cc8519fCFC4D731D71a90C43a "Hello World!"
