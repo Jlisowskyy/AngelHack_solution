@@ -1,0 +1,11 @@
+/.vs
+/**/.vs
+/bin
+/**/bin
+/obj
+/**/obj
+/.idea
+/**/.idea
+/.venv
+/**/.venv
+
