@@ -24,9 +24,11 @@ contract UserContract {
     }
 
     function buyAccessKeyFromCourseContract(address _courseContractAddress) public payable onlyOwner {
+        require(contractsMap[_courseContractAddress] == 0, "User already bought the rights");
+
         CourseContract courseContract = CourseContract(_courseContractAddress);
         uint256 price = courseContract.getPrice();
-        require(msg.value >= price, "Insufficient payment.");
+        require(msg.value < price, "Insufficient payment.");
 
         courseContract.buyAccess{value: msg.value}();
 
