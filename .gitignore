@@ -9,3 +9,10 @@
 /.venv
 /**/.venv
 
+# Flutter/Dart
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+assets/video/*
+
