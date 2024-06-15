@@ -4,8 +4,11 @@ import 'package:media_kit_video/media_kit_video.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
   final String videoPath;
+  final VoidCallback onVideoEnd;
 
-  VideoPlayerScreen({Key? key, required this.videoPath}) : super(key: key);
+  VideoPlayerScreen(
+      {Key? key, required this.videoPath, required this.onVideoEnd})
+      : super(key: key);
 
   @override
   _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
@@ -14,6 +17,7 @@ class VideoPlayerScreen extends StatefulWidget {
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   late Player player;
   late VideoController controller;
+  double _currentVideoPosition = 0;
 
   @override
   void initState() {
@@ -21,6 +25,15 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     player = Player();
     controller = VideoController(player);
     player.open(Media(widget.videoPath));
+
+    // Listen for video end
+    player.stream.completed.listen(
+      (event) {
+        if (player.state.completed) {
+          widget.onVideoEnd();
+        }
+      },
+    );
   }
 
   @override
@@ -40,15 +53,32 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: AspectRatio(
-          aspectRatio: 16 / 9,
-          child: Video(
-            controller: controller,
-            // controls: MaterialVideoControls,
+        body: Stack(
+      children: [
+        Center(
+          child: MaterialVideoControlsTheme(
+            normal: MaterialVideoControlsThemeData(
+              displaySeekBar: false,
+              automaticallyImplySkipNextButton: false,
+              automaticallyImplySkipPreviousButton: false,
+              // Only show the play/pause button
+              // bottomButtonBar -> List<Widget>
+              primaryButtonBar: [
+                MaterialPlayOrPauseButton(),
+              ],
+            ),
+            fullscreen: MaterialVideoControlsThemeData(
+              displaySeekBar: false,
+              automaticallyImplySkipNextButton: false,
+              automaticallyImplySkipPreviousButton: false,
+            ),
+            child: Video(
+              controller: controller,
+              controls: MaterialVideoControls,
+            ),
           ),
         ),
-      ),
-    );
+      ],
+    ));
   }
 }

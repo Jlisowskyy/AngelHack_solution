@@ -7,7 +7,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
+  int _currentBarItemIndex = 0;
+  int _currentVideoIndex = 0;
   final int swipeDelta = 7;
 
   PageController _pageController = PageController(initialPage: 1);
@@ -16,12 +17,27 @@ class _HomePageState extends State<HomePage> {
     'assets/videos/video1.mp4',
     'assets/videos/video2.mp4',
     'assets/videos/video3.mp4',
+    'assets/videos/video4.mp4',
+    'assets/videos/video5.mp4',
   ];
 
   void _onPageChanged(int index) {
     setState(() {
-      _currentIndex = index;
+      _currentVideoIndex = index;
     });
+  }
+
+  void _onBarItemTapped(int index) {
+    setState(() {
+      _currentBarItemIndex = index;
+    });
+  }
+
+  void _onVideoEnd() {
+    if (_currentVideoIndex < videoPaths.length - 1) {
+      _pageController.nextPage(
+          duration: const Duration(milliseconds: 500), curve: Curves.ease);
+    }
   }
 
   @override
@@ -37,7 +53,10 @@ class _HomePageState extends State<HomePage> {
         onPageChanged: _onPageChanged,
         itemCount: videoPaths.length,
         itemBuilder: (context, index) {
-          return VideoPlayerScreen(videoPath: videoPaths[index]);
+          return VideoPlayerScreen(
+            videoPath: videoPaths[index],
+            onVideoEnd: _onVideoEnd,
+          );
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -51,11 +70,10 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
               icon: Icon(Icons.account_circle), label: 'My Account'),
         ],
-        currentIndex:
-            0, // Always set to 0 as we are not using it to control video
+        currentIndex: _currentBarItemIndex,
         selectedItemColor: Colors.amber[800],
         unselectedItemColor: Colors.grey[600],
-        onTap: (_) {}, // Do nothing on tap
+        onTap: _onBarItemTapped,
       ),
     );
   }
