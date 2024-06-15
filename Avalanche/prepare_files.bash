@@ -7,3 +7,4 @@ mkdir $DEST
 cp -r src $DEST
 cp -r users $DEST
 cp deploy* $DEST
+cp test* $DEST
