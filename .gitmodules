@@ -1,0 +1,3 @@
+[submodule "Avalanche/avalanche-starter-kit"]
+	path = Avalanche/avalanche-starter-kit
+	url = https://github.com/ava-labs/avalanche-starter-kit
