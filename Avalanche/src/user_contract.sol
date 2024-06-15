@@ -9,14 +9,21 @@ contract UserContract {
     
     mapping(address => uint256) private contractsMap;
     uint256 private contractCount;
+    address private owner;
 
     constructor(string memory _username, string memory _imageUrl) {
         username = _username;
         imageUrl = _imageUrl;
         contractCount = 0;
+        owner = msg.sender;
     }
 
-    function buyAccessKeyFromCourseContract(address _courseContractAddress) public payable {
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only the owner can perform the action.");
+        _;
+    }
+
+    function buyAccessKeyFromCourseContract(address _courseContractAddress) public payable onlyOwner {
         CourseContract courseContract = CourseContract(_courseContractAddress);
         uint256 price = courseContract.getPrice();
         require(msg.value >= price, "Insufficient payment.");
@@ -29,11 +36,11 @@ contract UserContract {
         contractCount++;
     }
 
-    function getContractCount() public view returns (uint256) {
+    function getContractCount() public view onlyOwner returns (uint256) {
         return contractCount;
     }
 
-    function getVideoLinksFromCourseContract(address _courseContractAddress) public view returns (string[] memory) {
+    function getVideoLinksFromCourseContract(address _courseContractAddress) public view onlyOwner returns (string[] memory) {
         require(contractsMap[_contractAddress] != 0, "User does not posses access to the course!");
 
         CourseContract courseContract = CourseContract(_courseContractAddress);
