@@ -1,9 +1,13 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
 from fields import video_fields, video_put_args, course_fields, course_put_args, user_fields, user_put_args
+import logging
+
+logging.basicConfig()
+logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
 
 
 app = Flask(__name__)
@@ -45,8 +49,7 @@ class CourseModel(db.Model):
     
 
     def __repr__(self):
-        return f"Course(title = {title}, description = {description}, short_description = {short_description}, category = {category}, istructor = {istructor_id}, duration = {duration}, thumbnail_path = {thumbnail_path}, rating = {rating})"
-    
+        return f"Course(title = {title}, description = {description}, short_description = {short_description}, category = {category}, duration = {duration}, thumbnail_path = {thumbnail_path}, rating = {rating}, istructor_id = {istructor_id})"
 
     
 class UserModel(db.Model):
@@ -55,6 +58,7 @@ class UserModel(db.Model):
     token_address = db.Column(db.String(100), nullable=False)
     username = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), nullable=False)
+    preferences = db.Column(db.String(100), nullable=False)
     profile_picture_url = db.Column(db.String(100), nullable=False)
 
     def __repr__(self):
@@ -182,7 +186,7 @@ class User(Resource):
         user = UserModel.query.filter_by(id=user_id).first()
         if user:
             abort(409, message="User id taken...")
-        user = UserModel(id=args['id'], username=args['username'], email=args['email'], profile_picture_url=args['profile_picture_url'])
+        user = UserModel(id=args['id'], token_address=args['token_address'], username=args['username'], email=args['email'], preferences=args['preferences'], profile_picture_url=args['profile_picture_url'])
         db.session.add(user)
         db.session.commit()
         return user, 201
@@ -224,16 +228,43 @@ class CourseVideos(Resource):
             video = VideoModel.query.filter_by(id=course_video.video_id).first()
             videos.append(video)
         return videos
+
+class CourseSearch(Resource):
+    @marshal_with(course_fields)
+    def get(self, search_query):
+        args = course_put_args.parse_args()
+        name_pattern = f"%{args['name']}%"
+        courses = CourseModel.query.filter(CourseModel.title.ilike(name_pattern)).all()
+        #courses = CourseModel.query.filter_by(category=search_query).all()
+        return courses
     
 api.add_resource(DiscoverVideos, '/discover_videos/<int:video_num>')
 api.add_resource(Video, '/video/<string:video_id>')
 api.add_resource(Course, '/course/<string:course_id>')
 api.add_resource(User, '/user/<string:user_id>')
 
+
+@app.errorhandler(500)
+def handle_500_error(e):
+    """Handle 500 errors by shutting down the server."""
+    shutdown_server()
+    return jsonify(error=str(e)), 500
+
+def shutdown_server():
+    func = request.environ.get('werkzeug.server.shutdown')
+    if func is None:
+        raise RuntimeError('Not running with the Werkzeug Server')
+    func()
+
+
+
 def create_tables():
     db.create_all()
+    print("All tables created.")
+
 
 if __name__ == '__main__':
     with app.app_context():
-        create_tables()
+        
         app.run(debug=True)
+        create_tables()

@@ -58,14 +58,18 @@ course_put_args.add_argument("rating", type=float, help="Rating of the course", 
 
 user_fields = {
     'id': fields.String,
+    'token_address': fields.String,
     'username': fields.String,
     'email': fields.String,
+    'preferences': fields.String,
     'profile_picture_url': fields.String
 }
 
 user_put_args = reqparse.RequestParser()
 user_put_args.add_argument("id", type=str, help="Id of the user is required", required=True)
+user_put_args.add_argument("token_address", type=str, help="Token address of the user is required", required=True)
 user_put_args.add_argument("username", type=str, help="Username of the user is required", required=True)
 user_put_args.add_argument("email", type=str, help="Email of the user is required", required=True)
+user_put_args.add_argument("preferences", type=str, help="Preferences of the user", required=True)
 user_put_args.add_argument("profile_picture_url", type=str, help="Profile picture of the user is required", required=True)
 
