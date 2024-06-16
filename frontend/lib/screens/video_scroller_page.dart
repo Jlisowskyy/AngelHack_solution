@@ -50,16 +50,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         }
       },
     );
-
-    _videosFuture.then((videos) {
-      logger.i('Videos loaded: ${videos.length}');
-      for (var video in videos) {
-        logger.i('Video: ${video.title}');
-      }
-    }).catchError((error) {
-      logger.e('Error loading videos: $error');
-      return <video_model.Video>[];
-    });
   }
 
   Future<List<video_model.Video>> _getVideos() async {
@@ -94,7 +84,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   Future<void> _navigateToCoursePage() async {
     try {
       final courseId = _videos[_currentVideoIndex].course_id.toString();
-      final courseData = await widget.client.getRequest('/courses/$courseId');
+      final courseData =
+          await widget.client.getRequest('/courses?course_id=${courseId}');
       final course = Course.fromJson(courseData);
       Navigator.push(
         context,
@@ -108,27 +99,10 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     }
   }
 
-  void _onHorizontalSwipe(DragUpdateDetails details) {
-    if (details.primaryDelta! > 0) {
-      // User swiped right
-      _navigateToCoursePage();
-    }
-  }
-
-  void _onVerticalSwipe(DragUpdateDetails details) {
-    if (details.primaryDelta! < 0 && _currentVideoIndex < _videos.length - 1) {
-      // User swiped up
-      setState(() {
-        _currentVideoIndex++;
-        _openCurrentVideo();
-      });
-    } else if (details.primaryDelta! > 0 && _currentVideoIndex > 0) {
-      // User swiped down
-      setState(() {
-        _currentVideoIndex--;
-        _openCurrentVideo();
-      });
-    }
+  @override
+  void dispose() {
+    player.dispose();
+    super.dispose();
   }
 
   @override
@@ -146,14 +120,32 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           }
 
           _videos = snapshot.data!;
-          _openCurrentVideo();
 
-          return GestureDetector(
-            onHorizontalDragUpdate: _onHorizontalSwipe,
-            onVerticalDragUpdate: _onVerticalSwipe,
-            child: Stack(
-              children: [
-                Center(
+          // Open the first video by default
+          if (_currentVideoIndex == 0) {
+            WidgetsBinding.instance!.addPostFrameCallback((_) {
+              _openCurrentVideo();
+            });
+          }
+
+          return PageView.builder(
+            scrollDirection: Axis.vertical,
+            itemCount: _videos.length,
+            onPageChanged: (index) {
+              setState(() {
+                _currentVideoIndex = index;
+                _openCurrentVideo();
+              });
+            },
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onHorizontalDragEnd: (details) {
+                  if (details.primaryVelocity! > 0) {
+                    // User swiped right
+                    _navigateToCoursePage();
+                  }
+                },
+                child: Center(
                   child: media_kit_video.MaterialVideoControlsTheme(
                     normal: media_kit_video.MaterialVideoControlsThemeData(
                       displaySeekBar: false,
@@ -177,8 +169,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     ),
                   ),
                 ),
-              ],
-            ),
+              );
+            },
           );
         },
       ),
