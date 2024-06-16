@@ -5,6 +5,7 @@ import '../models/video.dart' as video_model;
 import '../models/course.dart';
 import '../services/iclient_service.dart';
 import 'course_detail_page.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 import 'video_description_page.dart'; // Make sure to import the video description page
 
 class VideoDetailPage extends StatefulWidget {
@@ -52,7 +53,7 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
 
   Future<List<video_model.Video>> _fetchCourseVideos() async {
     final data = await widget.client
-        .getRequest('/videos?course_id=${widget.video.course_id}');
+        .getRequest('videos?course_id=${widget.video.course_id}');
     if (data != null && data['videos'] != null) {
       return List<video_model.Video>.from(
           data['videos'].map((video) => video_model.Video.fromJson(video)));

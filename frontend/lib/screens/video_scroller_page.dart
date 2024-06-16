@@ -7,6 +7,7 @@ import 'package:frontend/models/course.dart';
 import 'package:frontend/screens/course_detail_page.dart';
 import 'package:frontend/services/iclient_service.dart';
 import 'package:logger/logger.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 import '../models/video.dart' as video_model;
 
 class VideoPlayerScreen extends StatefulWidget {
@@ -90,9 +91,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     if (_videos.isNotEmpty && index < _videos.length) {
       player.open(Media(_videos[index].video_url));
     }
-    Future.delayed(Duration(milliseconds: 500), () {
-      player.play();
-    });
+    //Future.delayed(Duration(milliseconds: 500), () {
+    //  player.play();
+    //});
   }
 
   Future<void> _navigateToCoursePage() async {
@@ -145,34 +146,49 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               });
             },
             itemBuilder: (context, index) {
-              return GestureDetector(
-                onHorizontalDragEnd: (details) {
-                  if (details.primaryVelocity! > 0) {
-                    // User swiped right
-                    _navigateToCoursePage();
+              return VisibilityDetector(
+                key: Key('video-player-visibility-$index'),
+                onVisibilityChanged: (VisibilityInfo info) {
+                  if (info.visibleFraction < 0.1) {
+                    player.pause();
+                  } else {
+                    // To avoid playing all videos automatically when they become visible,
+                    // you might need additional logic to play only under certain conditions
+                    if (_currentVideoIndex == index) {
+                      player.play();
+                    }
                   }
                 },
-                child: Center(
-                  child: media_kit_video.MaterialVideoControlsTheme(
-                    normal: media_kit_video.MaterialVideoControlsThemeData(
-                      displaySeekBar: false,
-                      automaticallyImplySkipNextButton: false,
-                      automaticallyImplySkipPreviousButton: false,
-                      primaryButtonBar: [
-                        media_kit_video.MaterialPlayOrPauseButton(),
-                      ],
-                    ),
-                    fullscreen: media_kit_video.MaterialVideoControlsThemeData(
-                      displaySeekBar: false,
-                      automaticallyImplySkipNextButton: false,
-                      automaticallyImplySkipPreviousButton: false,
-                      primaryButtonBar: [
-                        media_kit_video.MaterialPlayOrPauseButton(),
-                      ],
-                    ),
-                    child: media_kit_video.Video(
-                      controller: controller,
-                      controls: media_kit_video.MaterialVideoControls,
+                child: GestureDetector(
+                  onHorizontalDragEnd: (details) {
+                    if (details.primaryVelocity! > 0) {
+                      // User swiped right
+                      _navigateToCoursePage();
+                    }
+                  },
+                  child: Center(
+                    child: media_kit_video.MaterialVideoControlsTheme(
+                      normal: media_kit_video.MaterialVideoControlsThemeData(
+                        displaySeekBar: false,
+                        automaticallyImplySkipNextButton: false,
+                        automaticallyImplySkipPreviousButton: false,
+                        primaryButtonBar: [
+                          media_kit_video.MaterialPlayOrPauseButton(),
+                        ],
+                      ),
+                      fullscreen:
+                          media_kit_video.MaterialVideoControlsThemeData(
+                        displaySeekBar: false,
+                        automaticallyImplySkipNextButton: false,
+                        automaticallyImplySkipPreviousButton: false,
+                        primaryButtonBar: [
+                          media_kit_video.MaterialPlayOrPauseButton(),
+                        ],
+                      ),
+                      child: media_kit_video.Video(
+                        controller: controller,
+                        controls: media_kit_video.MaterialVideoControls,
+                      ),
                     ),
                   ),
                 ),

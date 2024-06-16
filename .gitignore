@@ -18,7 +18,6 @@ build/
 .flutter-plugins
 .flutter-plugins-dependencies
 .packages
-frontend/assets/videos/*
 __pycache__
 /**/__pycache__
 *.pyc

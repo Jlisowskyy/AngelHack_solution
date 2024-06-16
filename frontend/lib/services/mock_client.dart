@@ -63,7 +63,7 @@ class MockClient implements IClientService {
         'description': 'Learn about Flutter widgets.',
         'thumbnail_url': 'https://example.com/flutter_widgets.jpg',
         'course_id': '1',
-        'video_url': 'assets/videos/video3.mp4',
+        'video_url': 'assets/videos/video1.mp4',
         'num_likes': 200,
         'num_views': 1500
       },
@@ -73,7 +73,7 @@ class MockClient implements IClientService {
         'description': 'Learn about React components.',
         'thumbnail_url': 'https://example.com/react_components.jpg',
         'course_id': '2',
-        'video_url': 'assets/videos/video4.mp4',
+        'video_url': 'assets/videos/video2.mp4',
         'num_likes': 180,
         'num_views': 1200
       },
@@ -83,7 +83,7 @@ class MockClient implements IClientService {
         'description': 'Learn about Flutter state management.',
         'thumbnail_url': 'https://example.com/flutter_state.jpg',
         'course_id': '1',
-        'video_url': 'assets/videos/video5.mp4',
+        'video_url': 'assets/videos/video1.mp4',
         'num_likes': 220,
         'num_views': 1700
       },
@@ -93,7 +93,7 @@ class MockClient implements IClientService {
         'description': 'Learn about React state management.',
         'thumbnail_url': 'https://example.com/react_state.jpg',
         'course_id': '2',
-        'video_url': 'assets/videos/video1.mp4',
+        'video_url': 'assets/videos/video2.mp4',
         'num_likes': 200,
         'num_views': 1500
       }
