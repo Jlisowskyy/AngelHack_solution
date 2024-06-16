@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+sqlalchemy
+databases
+psycopg2
+starlette
