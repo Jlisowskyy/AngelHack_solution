@@ -9,6 +9,7 @@ contract UserContract {
 
     mapping(address => uint256) private contractsMap;
     address[] private contractAddresses;
+    address[] private ownedCourses;
     uint256 private contractCount;
     address private owner;
 
@@ -22,6 +23,15 @@ contract UserContract {
     modifier onlyOwner() {
         require(msg.sender == owner, "Only the owner can perform the action.");
         _;
+    }
+
+    function addOwnCourse(address _ownCourseAddress) public onlyOwner {
+        ownedCourses.push(_ownCourseAddress);
+    }
+
+    function getOwnedCourses() public view onlyOwner returns (address[] memory)
+    {
+        return ownedCourses;
     }
 
     function buyAccessKeyFromCourseContract(address _courseContractAddress) public payable onlyOwner {

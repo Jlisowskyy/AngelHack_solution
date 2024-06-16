@@ -1,0 +1,24 @@
+-- USERS INTERAKCJE Z BLOCKCHAIN
+
+- buyAccessKeyFromCourseContract(address _courseContractAddress) - funkcja ktora wykupuje dostep do kursu od uzytkownika aktualnie bedacego wlascicielem address do kontraktu (tokenu) jest argumentem
+
+- getAllKeys()  returns (address[] memory) - funkcja zwraca listę adresów na kontrakty każdego kursu do którego posiadam dostep jako uzytkownika
+
+- getVideoLinksFromCourseContract(address _contractAddress) returns (string[] memory) - zwraca liste linkow do video bedacych elementami kursu, moze sie nie powiesc jesli uzytkownik nie posiada praw do kursu
+
+- addOwnCourse(address) - dodaje kurs ktorego jestem wlascicielem
+
+- getOwnedCourses() returns (address[] memory) - zwraca listę kursów które posiadam
+
+-- INTERAKCJE Z KURSEM
+
+- getPrice() (uint256) - funkcja zwraca aktualne cene kursu ustalona przez tworce kursu
+
+- updatePrice(uint256 _newPrice) - funkcja pozwala na dynamiczne zmiane ceny kursu
+
+- addVideoLink(string memory _newVideoLink) - dodaj nowe video do kursu
+
+- removeVideoLink(uint256 index) - usuwa konkretne video z kursu
+
+- getVideLinksOwner() (string[] memory) - zwraca liste filmow w przypadku tworcy (nie musi miec dodanego kursu do listy kursow)
+

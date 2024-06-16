@@ -41,6 +41,11 @@ contract CourseContract {
         return videoLinks;
     }
 
+    function getVideLinksOwner() external view onlyOwner returns (string[] memory)
+    {
+        return videoLinks;
+    }
+
     function updatePrice(uint256 _newPrice) external onlyOwner {
         price = _newPrice;
     }
