@@ -8,6 +8,7 @@ contract UserContract {
     string public imageUrl;
 
     mapping(address => uint256) private contractsMap;
+    address[] private contractAddresses;
     uint256 private contractCount;
     address private owner;
 
@@ -35,6 +36,7 @@ contract UserContract {
         uint256 accessKey = courseContract.getAccessKey();
 
         contractsMap[_courseContractAddress] = accessKey;
+        contractAddresses.push(_courseContractAddress);
         contractCount++;
     }
 
@@ -52,5 +54,9 @@ contract UserContract {
 
         CourseContract courseContract = CourseContract(_contractAddress);
         return courseContract.getVideoLinks(contractsMap[_contractAddress]);
+    }
+
+    function getAllKeys() public view onlyOwner returns (address[] memory) {
+        return contractAddresses;
     }
 }
