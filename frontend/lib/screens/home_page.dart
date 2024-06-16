@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'account_page.dart';
 import 'video_scroller_page.dart';
+import 'courses_page.dart';
+
+import '../services/iclient_service.dart';
+import '../services/mock_client.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -9,13 +14,21 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentBarItemIndex = 0;
-  final List<Widget> _pages = [
-    VideoScroller(),
-    Scaffold(body: Center(child: Text('Search Page'))),
-    Scaffold(body: Center(child: Text('Courses Page'))),
-    Scaffold(body: Center(child: Text('Wishlist Page'))),
-    AccountPage(),
-  ];
+
+  IClientService? clientService;
+  late List<Widget> _pages = [];
+
+  // Default constructor
+  _HomePageState() {
+    clientService = MockClient();
+
+    _pages = [
+      VideoScroller(),
+      Scaffold(body: Center(child: Text('Search Page'))),
+      CoursesPage(clientService: clientService!),
+      AccountPage(),
+    ];
+  }
 
   void _onBarItemTapped(int index) {
     setState(() {
@@ -26,9 +39,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Brain Unrot'),
-      ),
       body: IndexedStack(
         index: _currentBarItemIndex,
         children: _pages,
@@ -39,8 +49,6 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
           BottomNavigationBarItem(
               icon: Icon(Icons.school), label: 'My Courses'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.favorite), label: 'Wishlist'),
           BottomNavigationBarItem(
               icon: Icon(Icons.account_circle), label: 'My Account'),
         ],

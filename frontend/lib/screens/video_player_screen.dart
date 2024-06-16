@@ -17,7 +17,6 @@ class VideoPlayerScreen extends StatefulWidget {
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   late Player player;
   late VideoController controller;
-  double _currentVideoPosition = 0;
 
   @override
   void initState() {
