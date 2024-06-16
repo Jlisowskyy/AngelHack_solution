@@ -5,6 +5,8 @@ import '../services/metamask.dart';
 import '../models/Wallet.dart';
 
 import 'home_page.dart';
+import '../services/db_wrapper.dart';
+import 'create_account.dart';
 
 class MetaMaskLogin extends StatefulWidget {
   const MetaMaskLogin({Key? key}) : super(key: key);
@@ -31,17 +33,31 @@ class _MetaMaskLoginState extends State<MetaMaskLogin> {
 
                     if (provider.isConnected && provider.isInOperatingChain) {
                       text = 'Connected'; //connected
-                      Wallet.login(context, provider.currentAddress);
+                      Wallet.saveAddress(provider.currentAddress);
+                      String? contractId = db_wrapper.getUserContractId(provider.currentAddress);
 
-                      // Navigate to the home page
-                      Future.delayed(
-                        const Duration(milliseconds: 500),
-                        () => Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) => HomePage(),
+                      if (contractId == null) {
+                        Future.delayed(
+                          const Duration(milliseconds: 500),
+                          () => Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => CreateAccountPage(),
+                            ),
                           ),
-                        ),
-                      );
+                        );}
+                      else{
+                        Wallet.loadUser(provider.currentAddress);
+
+                        Future.delayed(
+                          const Duration(milliseconds: 500),
+                          () => Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => HomePage(),
+                            ),
+                          ),
+                        );}
+
+   
                     } else if (provider.isConnected &&
                         !provider.isInOperatingChain) {
                       text =

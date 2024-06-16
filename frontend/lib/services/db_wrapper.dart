@@ -7,4 +7,9 @@ class db_wrapper{
     return null;
   }
 
+  static Map<String, String>? getUserData(String user_token_id)
+  {
+    return null;
+  }
+
 }

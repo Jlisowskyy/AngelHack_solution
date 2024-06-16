@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../models/Wallet.dart';
 import 'home_page.dart';
 
 class CreateAccountPage extends StatefulWidget {
@@ -13,26 +14,21 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
   final TextEditingController _profileImageController = TextEditingController();
   String? _profileImageUrl;
 
-  Future<void> _createAccount() async {
+  void _createAccount() {
     if (_formKey.currentState!.validate()) {
-      // Custom logic after account creation
-      await _handleCreateAccount();
+      Wallet.createUser({
+        'login': _loginController.text,
+        'email': _emailController.text,
+        'profileImage': _profileImageController.text,
+      });
 
-      // Navigate to home page
+      // Custom logic after account creation
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => HomePage(),
         ),
       );
     }
-  }
-
-  Future<void> _handleCreateAccount() async {
-    // Implement your custom logic here
-    // For example, save the user data to the database or call an API
-    print('Account created for login: ${_loginController.text}');
-    await Future.delayed(
-        Duration(seconds: 2)); // Simulate some delay for custom logic
   }
 
   void _loadProfileImage() {
@@ -112,8 +108,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your email';
-                    } else if (!RegExp(
-                            r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')
+                    } else if (!RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')
                         .hasMatch(value)) {
                       return 'Please enter a valid email';
                     }
