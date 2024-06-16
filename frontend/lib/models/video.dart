@@ -21,6 +21,14 @@ class Video {
   });
 
   factory Video.fromJson(Map<String, dynamic> json) {
+    assert(json['id'] is String || json['id'] is int);
+    assert(json['title'] is String);
+    assert(json['description'] is String);
+    assert(json['video_url'] is String || json['video_url'] == Null);
+    assert(json['thumbnail_url'] is String || json['thumbnail_url'] == Null);
+    assert(json['course_id'] is String || json['course_id'] is int);
+    assert(json['num_likes'] is String || json['num_likes'] is int);
+    assert(json['num_views'] is String || json['num_views'] is int);
     return Video(
       id: json['id'] is String ? int.parse(json['id']) : json['id'].toInt(),
       title: json['title'] as String,

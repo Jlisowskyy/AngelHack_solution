@@ -43,7 +43,7 @@ class MockClient implements IClientService {
         'description': 'How to set up your Flutter development environment.',
         'thumbnail_url': 'https://example.com/flutter_setup.jpg',
         'course_id': '1',
-        'video_url': 'https://example.com/flutter_setup.mp4',
+        'video_url': 'assets/videos/video2.mp4',
         'num_likes': 150,
         'num_views': 1000
       },
@@ -53,7 +53,7 @@ class MockClient implements IClientService {
         'description': 'How to set up your React development environment.',
         'thumbnail_url': 'https://example.com/react_setup.jpg',
         'course_id': '2',
-        'video_url': 'https://example.com/react_setup.mp4',
+        'video_url': 'assets/videos/video1.mp4',
         'num_likes': 120,
         'num_views': 900
       }
@@ -83,9 +83,27 @@ class MockClient implements IClientService {
   @override
   Future<Map<String, dynamic>> getRequest(String endpoint) async {
     if (endpoint.startsWith("/courses")) {
-      return Future.delayed(Duration(seconds: 1), () => _coursesData);
+      var courseId = Uri.parse(endpoint).queryParameters['course_id'];
+      if (courseId == null) {
+        return Future.delayed(Duration(seconds: 1), () => _coursesData);
+      }
+
+      var course = _coursesData['courses']?.firstWhere(
+          (course) => course['id'] == courseId,
+          orElse: () => throw Exception("Course not found"));
+
+      if (course != null) {
+        return Future.delayed(Duration(seconds: 1), () => course);
+      } else {
+        throw Exception("Course not found");
+      }
     } else if (endpoint.startsWith("/videos")) {
       var courseId = Uri.parse(endpoint).queryParameters['course_id'];
+
+      if (courseId == null) {
+        var videos = _videosData['videos'];
+        return Future.delayed(Duration(seconds: 1), () => {'videos': videos});
+      }
       var videos = _videosData['videos']
           ?.where((video) => video['course_id'] == courseId)
           .toList();

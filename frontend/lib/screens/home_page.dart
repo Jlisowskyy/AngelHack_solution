@@ -22,9 +22,10 @@ class _HomePageState extends State<HomePage> {
   // Default constructor
   _HomePageState() {
     clientService = MockClient();
+    assert(clientService != null);
 
     _pages = [
-      VideoScroller(),
+      VideoPlayerScreen(client: clientService!),
       SearchCoursesPage(client: clientService!),
       CoursesPage(clientService: clientService!),
       AccountPage(),
