@@ -43,6 +43,7 @@ class MetaMaskProvider extends ChangeNotifier {
   }
 
   init() {
+
     //initialize listener
     if (isEnabled) {
       ethereum!.onAccountsChanged((accounts) {

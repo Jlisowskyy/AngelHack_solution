@@ -31,8 +31,21 @@
 
   <title>frontend</title>
   <link rel="manifest" href="manifest.json">
+  <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+  <script>
+    // Check if MetaMask is installed
+    window.addEventListener('load', function () {
+      if (typeof window.ethereum !== 'undefined') {
+        console.log('MetaMask is installed!');
+        window.web3 = new Web3(window.ethereum);
+      } else {
+        console.log('MetaMask is not installed. Please install it to use this app.');
+      }
+    });
+  </script>
 </head>
 <body>
+  <script src="main.dart.js" type="application/javascript"></script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
