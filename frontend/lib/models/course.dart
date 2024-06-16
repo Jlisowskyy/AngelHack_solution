@@ -34,11 +34,13 @@ class Course {
     } else if (value is num) {
       return value.toDouble();
     } else {
-      return -1.0;
+      return (-1.0 as double);
     }
   }
 
   factory Course.fromJson(Map<String, dynamic> json) {
+    var logger = Logger();
+    logger.i('Course.fromJson: $json');
     return Course(
       id: json['id'] as String,
       title: json['title'] as String,

@@ -28,7 +28,7 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
 
     // Prompt database for video data
     _videosFuture = widget.client
-        .getRequest('/videos?course_id=${widget.course.id}')
+        .getRequest('videos?course_id=${widget.course.id}')
         .then((data) {
       if (data != null && data['videos'] != null) {
         var videoList = List<Video>.from(

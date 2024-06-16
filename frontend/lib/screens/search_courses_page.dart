@@ -22,7 +22,7 @@ class _SearchCoursesPageState extends State<SearchCoursesPage> {
   }
 
   Future<List<Course>> _fetchCourses() async {
-    final data = await widget.client.getRequest('/courses');
+    final data = await widget.client.getRequest('courses');
     if (data != null && data['courses'] != null) {
       return List<Course>.from(
           data['courses'].map((course) => Course.fromJson(course)));

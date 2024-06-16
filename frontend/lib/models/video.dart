@@ -1,4 +1,5 @@
-/// A class to represent a video in the application and database.
+import 'dart:convert';
+
 class Video {
   final int id;
   final String title;
@@ -21,50 +22,39 @@ class Video {
   });
 
   factory Video.fromJson(Map<String, dynamic> json) {
-    assert(json['id'] is String || json['id'] is int);
-    assert(json['title'] is String);
-    assert(json['description'] is String);
-    assert(json['video_url'] is String || json['video_url'] == Null);
-    assert(json['thumbnail_url'] is String || json['thumbnail_url'] == Null);
-    assert(json['course_id'] is String || json['course_id'] is int);
-    assert(json['num_likes'] is String || json['num_likes'] is int);
-    assert(json['num_views'] is String || json['num_views'] is int);
     return Video(
-      id: json['id'] is String ? int.parse(json['id']) : json['id'].toInt(),
-      title: json['title'] as String,
-      description: json['description'] as String,
-      video_url: json['video_url'] as String ??
-          'https://example.com/default_video.mp4',
-      thumbnail_url: json['thumbnail_url'] as String ??
-          'https://example.com/default_thumbnail.jpg',
-      course_id: json['course_id'] is String
-          ? int.parse(json['course_id'])
-          : json['course_id'] == Null
-              ? -1
-              : json['course_id'].toInt(),
-      num_likes: json['num_likes'] is String
-          ? int.parse(json['num_likes'])
-          : json['num_likes'] == Null
-              ? -1
-              : json['num_likes'].toInt(),
-      num_views: json['num_views'] is String
-          ? int.parse(json['num_views'])
-          : json['num_views'] == Null
-              ? -1
-              : json['num_views'].toInt(),
+      id: _parseInt(json['id']),
+      title: json['title'] ?? '',
+      description: json['description'] ?? '',
+      video_url: json['video_url'] ?? 'https://example.com/default_video.mp4',
+      thumbnail_url:
+          json['thumbnail_url'] ?? 'https://example.com/default_thumbnail.jpg',
+      course_id: _parseInt(json['course_id']),
+      num_likes: _parseInt(json['num_likes']),
+      num_views: _parseInt(json['num_views']),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id.toString(),
+      'id': id,
       'title': title,
       'description': description,
-      'video_path': video_url,
-      'thumbnailPath': thumbnail_url,
+      'video_url': video_url,
+      'thumbnail_url': thumbnail_url,
       'course_id': course_id,
-      'num_likes': num_likes.toString(),
-      'num_views': num_views.toString(),
+      'num_likes': num_likes,
+      'num_views': num_views,
     };
+  }
+
+  static int _parseInt(dynamic value) {
+    if (value is String) {
+      return int.tryParse(value) ?? 0;
+    } else if (value is int) {
+      return value;
+    } else {
+      return 0;
+    }
   }
 }

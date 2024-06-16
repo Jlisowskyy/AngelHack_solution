@@ -21,9 +21,8 @@ class _CoursesPageState extends State<CoursesPage> {
     var logger = Logger();
 
     super.initState();
-    _coursesFuture = widget.clientService
-        .getRequest('/enrollments?user_id=123')
-        .then((data) {
+    _coursesFuture =
+        widget.clientService.getRequest('enrollments?user_id=123').then((data) {
       if (data != null && data['courses'] != null) {
         var courseList = List<Course>.from(
             data['courses'].map((course) => Course.fromJson(course)));

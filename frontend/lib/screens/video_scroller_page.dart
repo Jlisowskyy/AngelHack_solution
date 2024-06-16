@@ -54,7 +54,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   Future<List<video_model.Video>> _getVideos() async {
     try {
-      final data = await widget.client.getRequest('/videos');
+      final data = await widget.client.getRequest('videos');
       if (data != null && data['videos'] != null) {
         var videoList = List<video_model.Video>.from(
             data['videos'].map((video) => video_model.Video.fromJson(video)));

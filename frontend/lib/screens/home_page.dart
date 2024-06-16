@@ -7,6 +7,7 @@ import 'search_courses_page.dart';
 
 import '../services/iclient_service.dart';
 import '../services/mock_client.dart';
+import '../services/backend_service.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class _HomePageState extends State<HomePage> {
 
   // Default constructor
   _HomePageState() {
-    clientService = MockClient();
+    clientService = BackendService('http://127.0.0.1:8000/');
     assert(clientService != null);
 
     _pages = [
