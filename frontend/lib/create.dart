@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:media_kit/media_kit.dart';
-import 'screens/login_screen.dart';
+import 'screens/create_account.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Brain Unrot',
-      home: MetaMaskLogin(),
+      home: CreateAccountPage(),
     );
   }
 }

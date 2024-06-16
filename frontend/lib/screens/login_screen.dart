@@ -5,14 +5,14 @@ import '../services/metamask.dart';
 
 import 'home_page.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+class MetaMaskLogin extends StatefulWidget {
+  const MetaMaskLogin({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MetaMaskLogin> createState() => _MetaMaskLoginState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MetaMaskLoginState extends State<MetaMaskLogin> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(

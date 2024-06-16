@@ -38,6 +38,8 @@ dependencies:
   logger: ^1.0.0
   flutter_web3: ^2.1.9
   provider: ^6.0.1
+  image_picker: ^0.8.4+4
+
 
 
 
