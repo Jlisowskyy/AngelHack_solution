@@ -5,7 +5,7 @@ import 'package:logger/logger.dart';
 class DebugServerTestPage extends StatefulWidget {
   final IClientService client;
 
-  DebugServerTestPage({Key? key, required this.client}) : super(key: key);
+  const DebugServerTestPage({Key? key, required this.client}) : super(key: key);
 
   @override
   _DebugServerTestPageState createState() => _DebugServerTestPageState();
@@ -45,7 +45,7 @@ class _DebugServerTestPageState extends State<DebugServerTestPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Debug Server Test"),
+        title: const Text("Debug Server Test"),
         backgroundColor: Colors.deepPurple,
       ),
       body: Padding(
@@ -54,24 +54,24 @@ class _DebugServerTestPageState extends State<DebugServerTestPage> {
           children: [
             TextField(
               controller: _endpointController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "API Endpoint",
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: _sendRequest,
-              child: Text("Send Request"),
+              child: const Text("Send Request"),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             _isLoading
-                ? CircularProgressIndicator()
+                ? const CircularProgressIndicator()
                 : Expanded(
                     child: SingleChildScrollView(
                       child: Text(
                         _response,
-                        style: TextStyle(fontFamily: "monospace"),
+                        style: const TextStyle(fontFamily: "monospace"),
                       ),
                     ),
                   ),

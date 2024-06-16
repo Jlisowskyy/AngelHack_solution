@@ -6,7 +6,7 @@ class VideoPlayerScreen extends StatefulWidget {
   final String videoPath;
   final VoidCallback onVideoEnd;
 
-  VideoPlayerScreen(
+  const VideoPlayerScreen(
       {Key? key, required this.videoPath, required this.onVideoEnd})
       : super(key: key);
 
@@ -56,7 +56,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       children: [
         Center(
           child: MaterialVideoControlsTheme(
-            normal: MaterialVideoControlsThemeData(
+            normal: const MaterialVideoControlsThemeData(
               displaySeekBar: false,
               automaticallyImplySkipNextButton: false,
               automaticallyImplySkipPreviousButton: false,
@@ -64,7 +64,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 MaterialPlayOrPauseButton(),
               ],
             ),
-            fullscreen: MaterialVideoControlsThemeData(
+            fullscreen: const MaterialVideoControlsThemeData(
               displaySeekBar: false,
               automaticallyImplySkipNextButton: false,
               automaticallyImplySkipPreviousButton: false,

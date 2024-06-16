@@ -7,7 +7,7 @@ import '../models/course.dart'; // Import your Course model
 class CoursesPage extends StatefulWidget {
   final IClientService clientService;
 
-  CoursesPage({Key? key, required this.clientService}) : super(key: key);
+  const CoursesPage({Key? key, required this.clientService}) : super(key: key);
 
   @override
   _CoursesPageState createState() => _CoursesPageState();
@@ -51,7 +51,7 @@ class _CoursesPageState extends State<CoursesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Enrolled Courses"),
+        title: const Text("My Enrolled Courses"),
         backgroundColor: Colors.deepPurple,
       ),
       body: FutureBuilder<List<Course>>(
@@ -62,7 +62,7 @@ class _CoursesPageState extends State<CoursesPage> {
               return Center(child: Text("Error: ${snapshot.error}"));
             }
             if (snapshot.data == null || snapshot.data!.isEmpty) {
-              return Center(child: Text("No enrolled courses available"));
+              return const Center(child: Text("No enrolled courses available"));
             }
             return ListView.builder(
               itemCount: snapshot.data!.length,
@@ -78,13 +78,13 @@ class _CoursesPageState extends State<CoursesPage> {
                         width: double.infinity,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) =>
-                            Icon(Icons.error),
+                            const Icon(Icons.error),
                       ),
                       ListTile(
                         title: Text(course.title),
                         subtitle: Text(course.short_description),
                         trailing: IconButton(
-                          icon: Icon(Icons.arrow_forward),
+                          icon: const Icon(Icons.arrow_forward),
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -113,7 +113,7 @@ class _CoursesPageState extends State<CoursesPage> {
               },
             );
           }
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         },
       ),
     );

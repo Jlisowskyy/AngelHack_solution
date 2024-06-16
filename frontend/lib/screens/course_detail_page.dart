@@ -11,7 +11,7 @@ class CourseDetailPage extends StatefulWidget {
   final Course course;
   final IClientService client;
 
-  CourseDetailPage({Key? key, required this.course, required this.client})
+  const CourseDetailPage({Key? key, required this.course, required this.client})
       : super(key: key);
 
   @override
@@ -132,7 +132,7 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
 
                 return ListView.builder(
                   physics:
-                      NeverScrollableScrollPhysics(), // Disable scrolling inside the list
+                      const NeverScrollableScrollPhysics(), // Disable scrolling inside the list
                   shrinkWrap: true, // Take only the space needed
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {

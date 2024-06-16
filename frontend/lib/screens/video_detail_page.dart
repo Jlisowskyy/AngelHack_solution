@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 import '../models/video.dart' as video_model;
-import '../models/course.dart';
 import '../services/iclient_service.dart';
-import 'course_detail_page.dart';
 import 'video_description_page.dart'; // Make sure to import the video description page
 
 class VideoDetailPage extends StatefulWidget {
@@ -73,7 +71,7 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
     if (_videos.isNotEmpty && index < _videos.length) {
       player.open(Media(_videos[index].video_url));
     }
-    Future.delayed(Duration(milliseconds: 500), () {
+    Future.delayed(const Duration(milliseconds: 500), () {
       player.play();
     });
   }
@@ -91,11 +89,11 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
         future: _videosFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text("Error: ${snapshot.error}"));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text("No videos available"));
+            return const Center(child: Text("No videos available"));
           }
 
           _videos = snapshot.data!;
@@ -136,7 +134,7 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
                 top: 40,
                 left: 10,
                 child: IconButton(
-                  icon: Icon(Icons.arrow_back, color: Colors.white),
+                  icon: const Icon(Icons.arrow_back, color: Colors.white),
                   onPressed: () => Navigator.of(context).pop(),
                 ),
               ),

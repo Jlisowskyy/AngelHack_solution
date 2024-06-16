@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import '../models/Wallet.dart';
 import 'home_page.dart';
 
 class CreateAccountPage extends StatefulWidget {
+  const CreateAccountPage({Key? key}) : super(key: key);
+
   @override
   _CreateAccountPageState createState() => _CreateAccountPageState();
 }
@@ -13,26 +16,21 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
   final TextEditingController _profileImageController = TextEditingController();
   String? _profileImageUrl;
 
-  Future<void> _createAccount() async {
+  void _createAccount() {
     if (_formKey.currentState!.validate()) {
-      // Custom logic after account creation
-      await _handleCreateAccount();
+      Wallet.createUser({
+        'login': _loginController.text,
+        'email': _emailController.text,
+        'profileImage': _profileImageController.text,
+      });
 
-      // Navigate to home page
+      // Custom logic after account creation
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => HomePage(),
+          builder: (context) => const HomePage(),
         ),
       );
     }
-  }
-
-  Future<void> _handleCreateAccount() async {
-    // Implement your custom logic here
-    // For example, save the user data to the database or call an API
-    print('Account created for login: ${_loginController.text}');
-    await Future.delayed(
-        Duration(seconds: 2)); // Simulate some delay for custom logic
   }
 
   void _loadProfileImage() {
@@ -47,7 +45,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create Account'),
+        title: const Text('Create Account'),
         backgroundColor: Colors.deepPurple,
       ),
       body: Padding(
@@ -69,21 +67,21 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                             });
                           },
                           child: _profileImageUrl == null
-                              ? Icon(Icons.error, size: 50)
+                              ? const Icon(Icons.error, size: 50)
                               : null,
                         )
-                      : CircleAvatar(
+                      : const CircleAvatar(
                           radius: 50,
                           child: Icon(Icons.camera_alt, size: 50),
                         ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 TextFormField(
                   controller: _profileImageController,
                   decoration: InputDecoration(
                     labelText: 'Profile Image URL',
                     suffixIcon: IconButton(
-                      icon: Icon(Icons.check),
+                      icon: const Icon(Icons.check),
                       onPressed: _loadProfileImage,
                     ),
                   ),
@@ -94,10 +92,10 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 TextFormField(
                   controller: _loginController,
-                  decoration: InputDecoration(labelText: 'Login'),
+                  decoration: const InputDecoration(labelText: 'Login'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your login';
@@ -105,26 +103,25 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 TextFormField(
                   controller: _emailController,
-                  decoration: InputDecoration(labelText: 'Email'),
+                  decoration: const InputDecoration(labelText: 'Email'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your email';
-                    } else if (!RegExp(
-                            r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')
+                    } else if (!RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')
                         .hasMatch(value)) {
                       return 'Please enter a valid email';
                     }
                     return null;
                   },
                 ),
-                SizedBox(height: 32),
+                const SizedBox(height: 32),
                 Center(
                   child: ElevatedButton(
                     onPressed: _createAccount,
-                    child: Text('Create Account'),
+                    child: const Text('Create Account'),
                   ),
                 ),
               ],

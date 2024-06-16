@@ -6,7 +6,7 @@ import 'course_detail_page.dart';
 class SearchCoursesPage extends StatefulWidget {
   final IClientService client;
 
-  SearchCoursesPage({Key? key, required this.client}) : super(key: key);
+  const SearchCoursesPage({Key? key, required this.client}) : super(key: key);
 
   @override
   _SearchCoursesPageState createState() => _SearchCoursesPageState();
@@ -36,18 +36,18 @@ class _SearchCoursesPageState extends State<SearchCoursesPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search Courses'),
+        title: const Text('Search Courses'),
         backgroundColor: Colors.deepPurple,
       ),
       body: FutureBuilder<List<Course>>(
         future: _coursesFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text("Error: ${snapshot.error}"));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text("No courses available"));
+            return const Center(child: Text("No courses available"));
           }
 
           return ListView.builder(
@@ -69,11 +69,11 @@ class _SearchCoursesPageState extends State<SearchCoursesPage> {
                         if (loadingProgress == null) {
                           return child;
                         }
-                        return CircularProgressIndicator();
+                        return const CircularProgressIndicator();
                       },
                       errorBuilder: (BuildContext context, Object exception,
                           StackTrace? stackTrace) {
-                        return Icon(Icons.error);
+                        return const Icon(Icons.error);
                       },
                     ),
                     title: Text(course.title, style: textTheme.titleMedium),

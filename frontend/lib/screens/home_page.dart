@@ -10,6 +10,8 @@ import '../services/mock_client.dart';
 import '../services/backend_service.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -29,7 +31,7 @@ class _HomePageState extends State<HomePage> {
       VideoPlayerScreen(client: clientService!),
       SearchCoursesPage(client: clientService!),
       CoursesPage(clientService: clientService!),
-      AccountPage(),
+      const AccountPage(),
     ];
   }
 

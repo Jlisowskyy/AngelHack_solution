@@ -8,7 +8,7 @@ class Logged_user {
 
   }
 
-  static final Logged_user? _instance = null;
+  static const Logged_user? _instance = null;
 
   static Logged_user? get instance => _instance;
   User? _user;

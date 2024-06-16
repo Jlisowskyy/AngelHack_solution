@@ -24,8 +24,9 @@ class MetaMaskProvider extends ChangeNotifier {
       //check if web3 is enabled
       final accs = await ethereum!
           .requestAccount(); //we request address from the account
-      if (accs.isNotEmpty)
+      if (accs.isNotEmpty) {
         currentAddress = accs.first; //assign current address to first address
+      }
 
       currentChain =
           await ethereum!.getChainId(); //we will update the current chain
