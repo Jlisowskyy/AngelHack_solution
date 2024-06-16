@@ -62,6 +62,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           _openVideoAtIndex(0);
         });
+        _currentVideoIndex = 0;
         return videoList;
       }
       return <video_model
