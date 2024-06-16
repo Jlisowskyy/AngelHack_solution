@@ -33,7 +33,6 @@ dependencies:
   media_kit: ^1.1.10
   media_kit_video: ^1.2.4
   media_kit_libs_video: ^1.0.4
-  cached_network_image: ^3.2.0
   flutter_rating_bar: ^4.0.0
   logger: ^1.0.0
   flutter_web3: ^2.1.9

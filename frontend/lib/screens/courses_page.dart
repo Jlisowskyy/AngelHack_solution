@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'course_detail_page.dart';
 import 'package:logger/logger.dart';
 import '../services/iclient_service.dart';
@@ -74,14 +73,13 @@ class _CoursesPageState extends State<CoursesPage> {
                   clipBehavior: Clip.antiAlias,
                   child: Column(
                     children: [
-                      CachedNetworkImage(
-                        imageUrl: course.thumbnail_url,
+                      Image.network(
+                        course.thumbnail_url,
                         height: 150,
                         width: double.infinity,
                         fit: BoxFit.cover,
-                        placeholder: (context, url) =>
-                            CircularProgressIndicator(),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
+                        errorBuilder: (context, error, stackTrace) =>
+                            Icon(Icons.error),
                       ),
                       ListTile(
                         title: Text(course.title),

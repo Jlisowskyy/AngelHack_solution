@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:frontend/models/course.dart';
 import 'package:frontend/services/iclient_service.dart';
 import 'course_detail_page.dart';
@@ -60,14 +59,22 @@ class _SearchCoursesPageState extends State<SearchCoursesPage> {
                 child: Card(
                   elevation: 4.0,
                   child: ListTile(
-                    leading: CachedNetworkImage(
-                      imageUrl: course.thumbnail_url,
+                    leading: Image.network(
+                      course.thumbnail_url,
                       width: 100,
                       height: 100,
                       fit: BoxFit.cover,
-                      placeholder: (context, url) =>
-                          CircularProgressIndicator(),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
+                      loadingBuilder: (BuildContext context, Widget child,
+                          ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child;
+                        }
+                        return CircularProgressIndicator();
+                      },
+                      errorBuilder: (BuildContext context, Object exception,
+                          StackTrace? stackTrace) {
+                        return Icon(Icons.error);
+                      },
                     ),
                     title: Text(course.title, style: textTheme.titleMedium),
                     subtitle: Text(course.short_description,

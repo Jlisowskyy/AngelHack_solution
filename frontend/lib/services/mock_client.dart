@@ -56,6 +56,46 @@ class MockClient implements IClientService {
         'video_url': 'assets/videos/video1.mp4',
         'num_likes': 120,
         'num_views': 900
+      },
+      {
+        'id': '103',
+        'title': 'Flutter Widgets',
+        'description': 'Learn about Flutter widgets.',
+        'thumbnail_url': 'https://example.com/flutter_widgets.jpg',
+        'course_id': '1',
+        'video_url': 'assets/videos/video3.mp4',
+        'num_likes': 200,
+        'num_views': 1500
+      },
+      {
+        'id': '104',
+        'title': 'React Components',
+        'description': 'Learn about React components.',
+        'thumbnail_url': 'https://example.com/react_components.jpg',
+        'course_id': '2',
+        'video_url': 'assets/videos/video4.mp4',
+        'num_likes': 180,
+        'num_views': 1200
+      },
+      {
+        'id': '105',
+        'title': 'Flutter State Management',
+        'description': 'Learn about Flutter state management.',
+        'thumbnail_url': 'https://example.com/flutter_state.jpg',
+        'course_id': '1',
+        'video_url': 'assets/videos/video5.mp4',
+        'num_likes': 220,
+        'num_views': 1700
+      },
+      {
+        'id': '106',
+        'title': 'React State Management',
+        'description': 'Learn about React state management.',
+        'thumbnail_url': 'https://example.com/react_state.jpg',
+        'course_id': '2',
+        'video_url': 'assets/videos/video1.mp4',
+        'num_likes': 200,
+        'num_views': 1500
       }
     ]
   };

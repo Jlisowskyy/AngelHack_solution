@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:frontend/models/course.dart';
 import 'package:frontend/services/iclient_service.dart';
@@ -67,13 +66,12 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CachedNetworkImage(
-              imageUrl: widget.course.thumbnail_url,
+            Image.network(
+              widget.course.thumbnail_url,
               width: MediaQuery.of(context).size.width,
               height: 250, // Slightly larger image for more impact
               fit: BoxFit.cover,
-              placeholder: (context, url) => const CircularProgressIndicator(),
-              errorWidget: (context, url, error) =>
+              errorBuilder: (context, error, stackTrace) =>
                   const Icon(Icons.error_outline, size: 150),
             ),
             Padding(
@@ -144,15 +142,13 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
                       child: Card(
                         elevation: 4.0,
                         child: ListTile(
-                          leading: CachedNetworkImage(
-                            imageUrl: video.thumbnail_url,
+                          leading: Image.network(
+                            video.thumbnail_url,
                             width: 100,
                             height: 100,
                             fit: BoxFit.cover,
-                            placeholder: (context, url) =>
-                                const CircularProgressIndicator(),
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
+                            errorBuilder: (context, error, stackTrace) =>
+                                const Icon(Icons.error_outline),
                           ),
                           title:
                               Text(video.title, style: textTheme.titleMedium),
@@ -162,8 +158,8 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    VideoDetailPage(video: video),
+                                builder: (context) => VideoDetailPage(
+                                    video: video, client: widget.client),
                               ),
                             );
                           },

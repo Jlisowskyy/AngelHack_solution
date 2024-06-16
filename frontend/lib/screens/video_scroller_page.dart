@@ -90,6 +90,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     if (_videos.isNotEmpty && index < _videos.length) {
       player.open(Media(_videos[index].video_url));
     }
+    Future.delayed(Duration(milliseconds: 500), () {
+      player.play();
+    });
   }
 
   Future<void> _navigateToCoursePage() async {
