@@ -13,3 +13,9 @@
 /**/*.mp3
 /**/*.mp4
 
+# Flutter/Dart
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+frontend/assets/videos/*
