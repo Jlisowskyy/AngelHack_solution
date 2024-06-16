@@ -9,11 +9,5 @@ OWNER_CONTRACT="0xC46C17e8c6358a0cb1E45874B08D6EFf81cdD533"
 # check for contact count
 cast send --rpc-url fuji-c --keystore $CONSUMER $USER_CONTRACT "getContractCount()(uint256)" 2>&1 | tee -a $LOG_FILE
 
-# buy new access
-cast send --value 100000000000000 --rpc-url fuji-c --keystore $CONSUMER $USER_CONTRACT "buyAccessKeyFromCourseContract(address)" $OWNER_CONTRACT 2>&1 | tee -a $LOG_FILE
-
-# check for contact count
-cast send --rpc-url fuji-c --keystore $CONSUMER $USER_CONTRACT "getContractCount()(uint256)" 2>&1 | tee -a $LOG_FILE
-
 # get video links
 cast send --rpc-url fuji-c --keystore $CONSUMER $USER_CONTRACT "getVideoLinksFromCourseContract(address)(string[] memory)" $OWNER_CONTRACT 2>&1 | tee -a $LOG_FILE
