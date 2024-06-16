@@ -31,3 +31,4 @@ Before you begin, ensure you have the following installed:
    ```bash
    flutter run -d chrome
    ```
+   Or use other viable environment
