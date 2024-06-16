@@ -1,10 +1,13 @@
 from flask import Flask
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 
 from fields import video_fields, video_put_args, course_fields, course_put_args, user_fields, user_put_args
 
+
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
@@ -15,11 +18,15 @@ class VideoModel(db.Model):
     title = db.Column(db.String(100), nullable=False)
     num_likes = db.Column(db.Integer, nullable=False)
     num_views = db.Column(db.Integer, nullable=False)
+    category = db.Column(db.String(100), nullable=False) # TODO: dodaj wszedzie gdzie trzeba zmienic ehhe
+    lesson_number = db.Column(db.Integer, nullable=False)
+    tags = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(100), nullable=False)
     video_path = db.Column(db.String(100), nullable=False)
     thumbnail_path = db.Column(db.String(100), nullable=False)
     premium = db.Column(db.Boolean, nullable=False)
     course_id = db.Column(db.String(100), db.ForeignKey('course.id'), nullable=False)
+    
    
     def __repr__(self):
         return f"Video(title = {title}, num_likes = {num_likes}, num_views = {num_views}, description = {description}, video_path = {video_path}, thumbnail_path = {thumbnail_path}, premium = {premium}, course_id = {course_id})"
@@ -45,6 +52,7 @@ class CourseModel(db.Model):
 class UserModel(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.String(100), primary_key=True)
+    token_address = db.Column(db.String(100), nullable=False)
     username = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), nullable=False)
     profile_picture_url = db.Column(db.String(100), nullable=False)
@@ -205,6 +213,16 @@ class DiscoverVideos(Resource):
     def get(self, video_num):
         videos = VideoModel.query.filter_by(premium=False).limit(video_num).all()
 
+        return videos
+
+class CourseVideos(Resource):
+    @marshal_with(video_fields)
+    def get(self, course_id):
+        course_videos = CourseVideoModel.query.filter_by(course_id=course_id).all()
+        videos = []
+        for course_video in course_videos:
+            video = VideoModel.query.filter_by(id=course_video.video_id).first()
+            videos.append(video)
         return videos
     
 api.add_resource(DiscoverVideos, '/discover_videos/<int:video_num>')

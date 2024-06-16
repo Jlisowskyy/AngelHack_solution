@@ -6,6 +6,8 @@ video_fields = {
     'title': fields.String,
     'num_likes': fields.Integer,
     'num_views': fields.Integer,
+    'category': fields.String,
+    'lesson_number': fields.Integer,
     'description': fields.String,
     'video_path': fields.String,
     'thumbnail_path': fields.String,
@@ -18,6 +20,8 @@ video_put_args.add_argument("id", type=str, help="Id of the video is required", 
 video_put_args.add_argument("title", type=str, help="Title of the video is required", required=True)
 video_put_args.add_argument("num_likes", type=int, help="Number of likes on the video", required=True)
 video_put_args.add_argument("num_views", type=int, help="Number of views on the video", required=True)
+video_put_args.add_argument("category", type=str, help="Category of the video", required=True)
+video_put_args.add_argument("lesson_number", type=int, help="Lesson number of the video", required=True)
 video_put_args.add_argument("description", type=str, help="Description of the video", required=True)
 video_put_args.add_argument("video_path", type=str, help="Path to the video", required=True)
 video_put_args.add_argument("thumbnail_path", type=str, help="Path to the thumbnail", required=True)

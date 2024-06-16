@@ -1,5 +1,6 @@
 import requests
 BASE ="http://127.0.0.1:5000/"
+#BASE = "http://192.168.0.143:5000/"
 user_data = {
             'id': 'user1',
             'username': 'testuser',
