@@ -4,13 +4,13 @@ import configparser
 
 
 class TTS(object):
-    def __init__(self):
+    def __init__(self, config_path):
         self.cnf = configparser.ConfigParser()
-        self.cnf.read('config.ini')
+        self.cnf.read(config_path)
 
-    def generate(self, text_filepath):
+    def generate(self):
         # read file
-        with open(text_filepath, 'r') as file:
+        with open(self.cnf['TTS_CONFIG']['SCRIPT_PATH'], 'r') as file:
             flashcard = file.read()
 
         # opening client
@@ -26,7 +26,7 @@ class TTS(object):
         )
 
         # Save audio to MP3
-        output_filename = 'audio_storage/output.mp3'
+        output_filename = self.cnf['TTS_CONFIG']['AUDIO_PATH']
         save(audio, output_filename)
 
     @staticmethod
@@ -48,6 +48,6 @@ class TTS(object):
 
 
 if __name__ == '__main__':
-    tts = TTS()
-    tts.generate("example_flashcard.txt")
+    tts = TTS('config.ini')
+    tts.generate()
 

@@ -4,6 +4,7 @@ from moviepy.editor import TextClip
 from moviepy.video.tools.subtitles import SubtitlesClip
 import configparser
 
+
 class VideoEditor:
     def __init__(self, config_path):
         self.cnf = configparser.ConfigParser()
@@ -43,7 +44,7 @@ class VideoEditor:
         finalclip = result.set_audio(audioclip)
         finalclip.write_videofile(output_video_path, fps=clip.fps)
 
-    
+
 def get_audio_length(audio_path):
     audio = MP3(audio_path)
     return audio.info.length
