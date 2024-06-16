@@ -1,29 +1,27 @@
 import 'Logged_user.dart';
+import '../services/db_wrapper.dart';
+import '../screens/create_account.dart';
+
+import 'package:flutter/material.dart';
+
+
 
 class Wallet {
-  Wallet._privateConstructor();
-
-  // TODO: ADD LOGIN LOGIC HERE
-  static void login()
-  {
-    _instance = Wallet._privateConstructor();
-    
-    /*
-        LOGIN
-    
-     */
-
+  static void login(BuildContext context, String addr)
+  {    
+    address = addr;
+    String? contractId = db_wrapper.getUserContractId(addr);
+    if (contractId == null)
+    {
+      Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CreateAccountPage(),
+              ),
+            );
+    }
 
   }
 
-  static Wallet? _instance;
-
-  static Wallet? get instance => _instance;
-
-  final String _address = "";
-
-  String getAddress() {
-    return _address;
-  }
-
+  static String? address;
 }

@@ -3,7 +3,7 @@ import 'package:flutter_web3/flutter_web3.dart';
 
 class MetaMaskProvider extends ChangeNotifier {
   //here we will store our provider
-  static const operatingChain = 1; //First we will define operating chain
+  static const operatingChain = 43113; //First we will define operating chain
 
   String currentAddress = ''; //current address
 

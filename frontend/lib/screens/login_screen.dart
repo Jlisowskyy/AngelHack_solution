@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../services/metamask.dart';
+import '../models/Wallet.dart';
 
 import 'home_page.dart';
 
@@ -30,6 +31,8 @@ class _MetaMaskLoginState extends State<MetaMaskLogin> {
 
                     if (provider.isConnected && provider.isInOperatingChain) {
                       text = 'Connected'; //connected
+                      Wallet.login(context, provider.currentAddress);
+
                       // Navigate to the home page
                       Future.delayed(
                         const Duration(milliseconds: 500),
@@ -42,7 +45,7 @@ class _MetaMaskLoginState extends State<MetaMaskLogin> {
                     } else if (provider.isConnected &&
                         !provider.isInOperatingChain) {
                       text =
-                          'Wrong chain. Please connect to ${MetaMaskProvider.operatingChain}'; //wrong chain, what chain it should be connected to
+                          'Wrong chain. Please connect to ${MetaMaskProvider.operatingChain}, you are connected to: ${provider.currentChain}'; //wrong chain, what chain it should be connected to
                     } else if (provider.isEnabled) {
                       return Column(
                         mainAxisSize: MainAxisSize.min,
