@@ -8,6 +8,17 @@
 /**/.idea
 /.venv
 /**/.venv
+/**/config.ini
+/**/*.ini
+/**/*.mp3
+/**/*.mp4
+
+# Flutter/Dart
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+frontend/assets/videos/*
 __pycache__
 /**/__pycache__
 *.pyc
