@@ -29,6 +29,6 @@ Before you begin, ensure you have the following installed:
 4. **Run the Application**:
    Launch the application in a Chrome browser by executing:
    ```bash
-   flutter run -d chrome
+   flutter run -d chrome --web-renderer html --release
    ```
    Or use other viable environment
