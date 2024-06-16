@@ -10,9 +10,6 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _loginController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
   final TextEditingController _profileImageController = TextEditingController();
   String? _profileImageUrl;
 
@@ -31,6 +28,8 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
   }
 
   Future<void> _handleCreateAccount() async {
+    // Implement your custom logic here
+    // For example, save the user data to the database or call an API
     print('Account created for login: ${_loginController.text}');
     await Future.delayed(
         Duration(seconds: 2)); // Simulate some delay for custom logic
@@ -117,32 +116,6 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                             r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')
                         .hasMatch(value)) {
                       return 'Please enter a valid email';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 16),
-                TextFormField(
-                  controller: _passwordController,
-                  decoration: InputDecoration(labelText: 'Password'),
-                  obscureText: true,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 16),
-                TextFormField(
-                  controller: _confirmPasswordController,
-                  decoration: InputDecoration(labelText: 'Confirm Password'),
-                  obscureText: true,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please confirm your password';
-                    } else if (value != _passwordController.text) {
-                      return 'Passwords do not match';
                     }
                     return null;
                   },
