@@ -58,6 +58,10 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       if (data != null && data['videos'] != null) {
         var videoList = List<video_model.Video>.from(
             data['videos'].map((video) => video_model.Video.fromJson(video)));
+        // Auto-play the first video once videos are fetched
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          _openVideoAtIndex(0);
+        });
         return videoList;
       }
       return <video_model
@@ -78,14 +82,20 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   }
 
   void _openCurrentVideo() {
-    player.open(Media(_videos[_currentVideoIndex].video_url));
+    _openVideoAtIndex(_currentVideoIndex);
+  }
+
+  void _openVideoAtIndex(int index) {
+    if (_videos.isNotEmpty && index < _videos.length) {
+      player.open(Media(_videos[index].video_url));
+    }
   }
 
   Future<void> _navigateToCoursePage() async {
     try {
       final courseId = _videos[_currentVideoIndex].course_id.toString();
       final courseData =
-          await widget.client.getRequest('/courses?course_id=${courseId}');
+          await widget.client.getRequest('/courses?course_id=$courseId');
       final course = Course.fromJson(courseData);
       Navigator.push(
         context,
@@ -120,13 +130,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           }
 
           _videos = snapshot.data!;
-
-          // Open the first video by default
-          if (_currentVideoIndex == 0) {
-            WidgetsBinding.instance!.addPostFrameCallback((_) {
-              _openCurrentVideo();
-            });
-          }
 
           return PageView.builder(
             scrollDirection: Axis.vertical,

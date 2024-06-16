@@ -28,6 +28,16 @@ class Course {
     required this.price,
   });
 
+  static double _parseDouble(dynamic value) {
+    if (value is String) {
+      return double.tryParse(value) ?? -1.0;
+    } else if (value is num) {
+      return value.toDouble();
+    } else {
+      return -1.0;
+    }
+  }
+
   factory Course.fromJson(Map<String, dynamic> json) {
     return Course(
       id: json['id'] as String,
@@ -40,16 +50,8 @@ class Course {
       thumbnail_url: json['thumbnail_url'] ??
           'https://example.com/default_thumbnail.jpg', // Default thumbnail
       image_url: json['image_url'] ?? 'https://example.com/default_image.jpg',
-      rating: json['rating'] is String
-          ? double.parse(json['rating'])
-          : json['rating'] == Null
-              ? json['rating'].toDouble()
-              : -1.0,
-      price: json['price'] is String
-          ? double.parse(json['price'])
-          : json['price'] == Null
-              ? json['price'].toDouble()
-              : -1.0,
+      rating: _parseDouble(json['rating']),
+      price: _parseDouble(json['price']),
     );
   }
 
