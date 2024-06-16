@@ -9,4 +9,7 @@
 /.venv
 /**/.venv
 /**/config.ini
+/**/*.ini
+/**/*.mp3
+/**/*.mp4
 
