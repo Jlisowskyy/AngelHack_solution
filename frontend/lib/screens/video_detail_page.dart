@@ -53,7 +53,7 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
 
   Future<List<video_model.Video>> _fetchCourseVideos() async {
     final data = await widget.client
-        .getRequest('videos?course_id=${widget.video.course_id}');
+        .getRequest('/videos?course_id=${widget.video.course_id}');
     if (data != null && data['videos'] != null) {
       return List<video_model.Video>.from(
           data['videos'].map((video) => video_model.Video.fromJson(video)));
