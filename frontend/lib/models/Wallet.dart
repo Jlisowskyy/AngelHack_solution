@@ -1,4 +1,3 @@
-import 'user.dart';
 
 class Wallet {
   static void saveAddress(String addr)
@@ -11,7 +10,7 @@ class Wallet {
       
   }
 
-  static void loadUser(String user_token_id)
+  static void loadUser(String userTokenId)
   {
 
   }

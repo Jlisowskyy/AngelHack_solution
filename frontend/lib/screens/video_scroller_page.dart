@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:media_kit/media_kit.dart';
@@ -12,7 +11,7 @@ import '../models/video.dart' as video_model;
 class VideoPlayerScreen extends StatefulWidget {
   final IClientService client;
 
-  VideoPlayerScreen({
+  const VideoPlayerScreen({
     Key? key,
     required this.client,
   }) : super(key: key);
@@ -90,7 +89,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     if (_videos.isNotEmpty && index < _videos.length) {
       player.open(Media(_videos[index].video_url));
     }
-    Future.delayed(Duration(milliseconds: 500), () {
+    Future.delayed(const Duration(milliseconds: 500), () {
       player.play();
     });
   }
@@ -126,11 +125,11 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         future: _videosFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No videos available'));
+            return const Center(child: Text('No videos available'));
           }
 
           _videos = snapshot.data!;
@@ -154,7 +153,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 },
                 child: Center(
                   child: media_kit_video.MaterialVideoControlsTheme(
-                    normal: media_kit_video.MaterialVideoControlsThemeData(
+                    normal: const media_kit_video.MaterialVideoControlsThemeData(
                       displaySeekBar: false,
                       automaticallyImplySkipNextButton: false,
                       automaticallyImplySkipPreviousButton: false,
@@ -162,7 +161,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                         media_kit_video.MaterialPlayOrPauseButton(),
                       ],
                     ),
-                    fullscreen: media_kit_video.MaterialVideoControlsThemeData(
+                    fullscreen: const media_kit_video.MaterialVideoControlsThemeData(
                       displaySeekBar: false,
                       automaticallyImplySkipNextButton: false,
                       automaticallyImplySkipPreviousButton: false,

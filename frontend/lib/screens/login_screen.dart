@@ -41,7 +41,7 @@ class _MetaMaskLoginState extends State<MetaMaskLogin> {
                           const Duration(milliseconds: 500),
                           () => Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                              builder: (context) => CreateAccountPage(),
+                              builder: (context) => const CreateAccountPage(),
                             ),
                           ),
                         );}
@@ -52,7 +52,7 @@ class _MetaMaskLoginState extends State<MetaMaskLogin> {
                           const Duration(milliseconds: 500),
                           () => Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                              builder: (context) => HomePage(),
+                              builder: (context) => const HomePage(),
                             ),
                           ),
                         );}

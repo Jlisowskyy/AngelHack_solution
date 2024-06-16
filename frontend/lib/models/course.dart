@@ -1,4 +1,3 @@
-import 'package:logger/logger.dart';
 
 /// A class to represent a course in the application and database.
 class Course {

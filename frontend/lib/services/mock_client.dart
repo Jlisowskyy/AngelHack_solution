@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'iclient_service.dart';
 
@@ -125,7 +124,7 @@ class MockClient implements IClientService {
     if (endpoint.startsWith("/courses")) {
       var courseId = Uri.parse(endpoint).queryParameters['course_id'];
       if (courseId == null) {
-        return Future.delayed(Duration(seconds: 1), () => _coursesData);
+        return Future.delayed(const Duration(seconds: 1), () => _coursesData);
       }
 
       var course = _coursesData['courses']?.firstWhere(
@@ -133,7 +132,7 @@ class MockClient implements IClientService {
           orElse: () => throw Exception("Course not found"));
 
       if (course != null) {
-        return Future.delayed(Duration(seconds: 1), () => course);
+        return Future.delayed(const Duration(seconds: 1), () => course);
       } else {
         throw Exception("Course not found");
       }
@@ -142,15 +141,15 @@ class MockClient implements IClientService {
 
       if (courseId == null) {
         var videos = _videosData['videos'];
-        return Future.delayed(Duration(seconds: 1), () => {'videos': videos});
+        return Future.delayed(const Duration(seconds: 1), () => {'videos': videos});
       }
       var videos = _videosData['videos']
           ?.where((video) => video['course_id'] == courseId)
           .toList();
-      return Future.delayed(Duration(seconds: 1), () => {'videos': videos});
+      return Future.delayed(const Duration(seconds: 1), () => {'videos': videos});
     } else if (endpoint.startsWith("/users")) {
       return Future.delayed(
-          Duration(seconds: 1),
+          const Duration(seconds: 1),
           () => {
                 'id': '123',
                 'name': 'John Doe',
@@ -170,7 +169,7 @@ class MockClient implements IClientService {
           ?.where((course) => enrolledCourseIds.contains(course['id']))
           .toList();
       return Future.delayed(
-          Duration(seconds: 1), () => {'courses': enrolledCourses});
+          const Duration(seconds: 1), () => {'courses': enrolledCourses});
     }
     throw Exception("Endpoint not found");
   }
@@ -178,6 +177,6 @@ class MockClient implements IClientService {
   @override
   Future<Map<String, dynamic>> postRequest(
       String endpoint, Map<String, dynamic> body) async {
-    return Future.delayed(Duration(seconds: 1), () => {'status': 'success'});
+    return Future.delayed(const Duration(seconds: 1), () => {'status': 'success'});
   }
 }

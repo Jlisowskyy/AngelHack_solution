@@ -3,6 +3,8 @@ import '../models/Wallet.dart';
 import 'home_page.dart';
 
 class CreateAccountPage extends StatefulWidget {
+  const CreateAccountPage({Key? key}) : super(key: key);
+
   @override
   _CreateAccountPageState createState() => _CreateAccountPageState();
 }
@@ -25,7 +27,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
       // Custom logic after account creation
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => HomePage(),
+          builder: (context) => const HomePage(),
         ),
       );
     }
@@ -43,7 +45,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create Account'),
+        title: const Text('Create Account'),
         backgroundColor: Colors.deepPurple,
       ),
       body: Padding(
@@ -65,21 +67,21 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                             });
                           },
                           child: _profileImageUrl == null
-                              ? Icon(Icons.error, size: 50)
+                              ? const Icon(Icons.error, size: 50)
                               : null,
                         )
-                      : CircleAvatar(
+                      : const CircleAvatar(
                           radius: 50,
                           child: Icon(Icons.camera_alt, size: 50),
                         ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 TextFormField(
                   controller: _profileImageController,
                   decoration: InputDecoration(
                     labelText: 'Profile Image URL',
                     suffixIcon: IconButton(
-                      icon: Icon(Icons.check),
+                      icon: const Icon(Icons.check),
                       onPressed: _loadProfileImage,
                     ),
                   ),
@@ -90,10 +92,10 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 TextFormField(
                   controller: _loginController,
-                  decoration: InputDecoration(labelText: 'Login'),
+                  decoration: const InputDecoration(labelText: 'Login'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your login';
@@ -101,10 +103,10 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 TextFormField(
                   controller: _emailController,
-                  decoration: InputDecoration(labelText: 'Email'),
+                  decoration: const InputDecoration(labelText: 'Email'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your email';
@@ -115,11 +117,11 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 32),
+                const SizedBox(height: 32),
                 Center(
                   child: ElevatedButton(
                     onPressed: _createAccount,
-                    child: Text('Create Account'),
+                    child: const Text('Create Account'),
                   ),
                 ),
               ],
