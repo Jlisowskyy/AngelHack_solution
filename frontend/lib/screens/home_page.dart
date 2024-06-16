@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'account_page.dart';
 import 'video_scroller_page.dart';
 import 'courses_page.dart';
+import 'search_courses_page.dart';
 
 import '../services/iclient_service.dart';
 import '../services/mock_client.dart';
@@ -24,7 +25,7 @@ class _HomePageState extends State<HomePage> {
 
     _pages = [
       VideoScroller(),
-      Scaffold(body: Center(child: Text('Search Page'))),
+      SearchCoursesPage(client: clientService!),
       CoursesPage(clientService: clientService!),
       AccountPage(),
     ];

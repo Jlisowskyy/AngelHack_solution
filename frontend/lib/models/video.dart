@@ -31,13 +31,19 @@ class Video {
           'https://example.com/default_thumbnail.jpg',
       course_id: json['course_id'] is String
           ? int.parse(json['course_id'])
-          : json['course_id'].toInt(),
+          : json['course_id'] == Null
+              ? -1
+              : json['course_id'].toInt(),
       num_likes: json['num_likes'] is String
           ? int.parse(json['num_likes'])
-          : json['num_likes'].toInt(),
+          : json['num_likes'] == Null
+              ? -1
+              : json['num_likes'].toInt(),
       num_views: json['num_views'] is String
           ? int.parse(json['num_views'])
-          : json['num_views'].toInt(),
+          : json['num_views'] == Null
+              ? -1
+              : json['num_views'].toInt(),
     );
   }
 
