@@ -28,7 +28,7 @@ contract UserContract {
 
         CourseContract courseContract = CourseContract(_courseContractAddress);
         uint256 price = courseContract.getPrice();
-        require(msg.value < price, "Insufficient payment.");
+        require(msg.value >= price, "Insufficient payment.");
 
         courseContract.buyAccess{value: msg.value}();
 
