@@ -34,7 +34,7 @@ Our app offers an innovative approach to learning by presenting courses through 
 
 Watch our short demo video to see the app in action:
 
-[![Digital Empowerment Learning App Demo](icon.jpeg)](demo_vid.mp4)
+[![Digital Empowerment Learning App Demo](demo_vid.mp4)]
 
 ## Setup Instructions
 
