@@ -34,7 +34,14 @@ Our app offers an innovative approach to learning by presenting courses through 
 
 Watch our short demo video to see the app in action:
 
+<<<<<<< HEAD
 [![Digital Empowerment Learning App Demo](icon.jpeg)](demo_vid.mp4)
+=======
+<video width="320" height="240" controls>
+  <source src="output.webm" type="video/webm">
+</video>
+
+>>>>>>> f88c5f1 (next)
 
 ## Setup Instructions
 
