@@ -1,9 +1,9 @@
 
-# Angel Hack Challenge Solution - Digital Empowerment Learning App - EduChain
+# Angel Hack Challenge Solution - Digital Empowerment - EduChain
 
 ## Overview
 
-Welcome to the Digital Empowerment Learning App, a revolutionary platform designed to enhance learning through short, engaging video content. Our application, which secured second place in the "Digital Empowerment" category at the AngelHack hackathon, aims to combat the decreasing attention span problem by offering educational content in a format inspired by TikTok but with significant differences.
+Welcome to the EduChain App, a revolutionary platform designed to enhance learning through short, engaging video content. Our application, which secured second place in the "Digital Empowerment" category at the AngelHack hackathon, aims offer digestable educationalcontent in a format inspired by TikTok but with significant differences.
 
 ## Problem Statement
 
