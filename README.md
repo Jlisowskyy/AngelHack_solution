@@ -34,9 +34,7 @@ Our app offers an innovative approach to learning by presenting courses through 
 
 Watch our short demo video to see the app in action:
 
-<video width="320" height="240" controls>
-  <source src="output.webm" type="video/webm">
-</video>
+[output.webm](https://github.com/Jlisowskyy/AngelHack_solution/assets/115403674/cafde24f-cf8b-4f4f-967a-5ba1421d4f46)
 
 ## Setup Instructions
 
@@ -61,6 +59,7 @@ Before you begin, ensure you have the following installed:
    ```bash
    flutter devices
    ```
+
    Ensure that Chrome and the web server are listed as available devices for the best experience.
 
 4. **Run the Application**:
