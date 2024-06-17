@@ -1,12 +1,45 @@
 
-# Angel Hack Challenge Solution
+# Angel Hack Challenge Solution - Digital Empowerment Learning App - EduChain
 
-[App](https://angel-hack-solution.vercel.app/) \
-[video demo](https://drive.google.com/file/d/1tO0RYsNDb0_iGN-7dSCWLIcccgQcPMYJ/view?usp=drive_link) \
-Before you begin, ensure you have the following installed:
-- **Flutter SDK**: Install the latest version of Flutter on your PC from [Flutter's official website](https://flutter.dev).
+## Overview
+
+Welcome to the Digital Empowerment Learning App, a revolutionary platform designed to enhance learning through short, engaging video content. Our application, which secured second place in the "Digital Empowerment" category at the AngelHack hackathon, aims to combat the decreasing attention span problem by offering educational content in a format inspired by TikTok but with significant differences.
+
+## Problem Statement
+
+In today's fast-paced digital world, our attention span is rapidly decreasing due to the influx of brief, fragmented content. While this trend might not significantly impact many daily activities, it poses a considerable challenge for learning and personal development. Our solution addresses this issue by providing a platform for buying and watching educational courses entirely presented as very short videos.
+
+## Solution
+
+Our app offers an innovative approach to learning by presenting courses through short, engaging videos, akin to TikTok. However, our content is exclusively educational. The app has two main features:
+
+1. **Homepage**: Users can swipe through free short video previews of various courses. The content displayed here is guided by a content-matching algorithm to enhance user experience and engagement.
+
+2. **Purchased Content Page**: Users can swipe through the short videos of the courses they have purchased. This section offers a personalized viewing experience, allowing users to tailor their learning journey.
+
+### Key Features
+
+- **Cryptocurrency Payments**: All transactions within the app are conducted using cryptocurrencies.
+- **User Identification**: Users are identified through their crypto wallets.
+- **Blockchain Integration**: The blockchain enables the exchange of course access and ownership.
+- **AI-Powered Content Creation**: Our platform supports content creators with advanced AI tools to generate high-quality educational material.
+
+## Technologies Used
+
+- **Frontend**: Flutter
+- **Backend**: Python, 
+- **Blockchain**: Solidity
+
+## Demo
+
+Watch our short demo video to see the app in action:
+
+[![Digital Empowerment Learning App Demo](icon.jpeg)](demo_vid.mp4)
 
 ## Setup Instructions
+
+Before you begin, ensure you have the following installed:
+- **Flutter SDK**: Install the latest version of Flutter on your PC from [Flutter's official website](https://flutter.dev).
 
 1. **Clone the Repository**: 
    Start by cloning the app repository to your local machine. Use the following commands to clone and navigate into the project directory:
