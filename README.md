@@ -44,7 +44,7 @@ Before you begin, ensure you have the following installed:
 1. **Clone the Repository**: 
    Start by cloning the app repository to your local machine. Use the following commands to clone and navigate into the project directory:
    ```bash
-   git clone https://github.com/kryczkal/AngelHack_solution.git
+   git clone https://github.com/Jlisowskyy/AngelHack_solution.git
    cd AngelHack_solution/frontend
    ```
 
