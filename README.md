@@ -1,6 +1,8 @@
 
 # Angel Hack Challenge Solution - Digital Empowerment - EduChain
 
+![https://github.com/Jlisowskyy/AngelHack_solution/win.jpg](https://github.com/Jlisowskyy/AngelHack_solution/blob/main/win.jpg)
+
 ## Overview
 
 Welcome to the EduChain App, a revolutionary platform designed to enhance learning through short, engaging video content. Our application, which secured second place in the "Digital Empowerment" category at the AngelHack hackathon, aims offer digestable educationalcontent in a format inspired by TikTok but with significant differences.
